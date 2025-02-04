@@ -18,12 +18,18 @@ services:
     container_name: web-ui
     depends_on:
       - ollama
+      - tika
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
     ports:
       - "8081:8080"
     volumes:
       - open-webui:/app/backend/data
+    networks:
+      - ollama-docker
+  tika:
+    image: apache/tika:latest-full
+    container_name: tika
     networks:
       - ollama-docker
 volumes:
